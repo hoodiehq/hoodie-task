@@ -1,0 +1,48 @@
+{
+  "name": "hapi-couchdb-task",
+  "version": "1.0.0",
+  "description": "CouchDB-based REST & front-end API for asynchronous background tasks",
+  "main": "index.js",
+  "bin": "bin/server.js",
+  "scripts": {
+    "test": "standard",
+    "start": "bin/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoodiehq/hapi-couchdb-task.git"
+  },
+  "keywords": [
+    "hapi",
+    "plugin",
+    "couchdb",
+    "pouchdb",
+    "task",
+    "hoodie"
+  ],
+  "author": "Gregor Martynus <gregor@martynus.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hoodiehq/hapi-couchdb-task/issues"
+  },
+  "homepage": "https://github.com/hoodiehq/hapi-couchdb-task#readme",
+  "devDependencies": {
+    "standard": "^5.2.2"
+  },
+  "dependencies": {
+    "boom": "^2.8.0",
+    "browserify": "^11.0.1",
+    "good": "^6.3.0",
+    "good-console": "^5.0.3",
+    "h2o2": "^4.0.1",
+    "hapi": "^9.3.1",
+    "hapi-cors-headers": "^1.0.0",
+    "humble-localstorage": "^1.4.2",
+    "inert": "^3.0.1",
+    "joi": "^6.6.1",
+    "pouchdb-hoodie-store": "^1.0.2",
+    "random-string": "^0.1.2",
+    "request": "^2.61.0",
+    "spawn-pouchdb-server": "^3.1.0"
+  }
+}
