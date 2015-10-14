@@ -28,7 +28,7 @@ function TaskStore (id) {
 
   store.connect()
   store.on('error', function (error) {
-    debugger
+    console.error(error)
   })
   window.store = store
 
@@ -37,23 +37,23 @@ function TaskStore (id) {
 
 function getTaskApi (state, type) {
   var emitter = new EventEmitter()
+  var scopedStore = state.store(type)
 
   return {
     start: function (attributes, options) {
-      return state.store.add({
-        type: type,
+      return scopedStore.add({
         attributes: attributes
       })
 
       .then(function (task) {
         emitter.emit('start', task)
         return new Promise(function (resolve, reject) {
-          state.store.on('change', handleStoreChange)
+          scopedStore.on('change', handleStoreChange)
 
           function handleStoreChange (eventName, changedTask, options) {
             if (task.id !== changedTask.id) return
 
-            if (!options || !options.remote) return
+            // if (!options || !options.remote) return
 
             if (eventName === 'remove') {
               emitter.emit('success', changedTask)
