@@ -53,7 +53,9 @@ server.register({
 server.register({
   register: plugin
 }, function (error) {
-  if (error) throw error
+  if (error) {
+    throw error
+  }
 
   // enable CORS
   server.ext('onPreResponse', corsHeaders)
