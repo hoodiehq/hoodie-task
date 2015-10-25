@@ -12,7 +12,9 @@ server.connection({ port: 3000 })
 server.register({
   register: require('inert')
 }, function (error) {
-  if (error) throw error
+  if (error) {
+    throw error
+  }
 })
 
 // serve demo app at route path
@@ -43,7 +45,9 @@ server.register({
 server.register({
   register: require('h2o2')
 }, function (error) {
-  if (error) throw error
+  if (error) {
+    throw error
+  }
 })
 
 server.register({

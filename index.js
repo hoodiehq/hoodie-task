@@ -34,14 +34,14 @@ function hapiCouchDbStore (server, options, next) {
     server.expose('dbUrl', couchUrl + '/tasks')
     next()
 
-    db = new PouchDB('http://admin:secret@localhost:1234/tasks')
+    var db = new PouchDB('http://admin:secret@localhost:1234/tasks')
     db.changes({
       include_docs: true,
       live: true,
       since: 'now'
     })
       .on('change', function (change) {
-        if (change.doc._rev.slice(0,2) === '1-') {
+        if (change.doc._rev.slice(0, 2) === '1-') {
           console.log('change in %s', change.id)
           console.log(change.doc.attributes)
           if (change.doc.attributes.error) {

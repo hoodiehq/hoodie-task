@@ -1,8 +1,6 @@
-/* global task store */
-
 var test = require('tape')
 
-require('../../client/')
+var task = require('../../client/').task
 
 test('task(type)', function (t) {
   t.plan(1)

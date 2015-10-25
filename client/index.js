@@ -15,9 +15,9 @@ if (!taskStoreId) {
 var CustomStore = Store.defaults({
   remoteBaseUrl: location.origin + '/api/user/'
 })
-global.task = new TaskStore(taskStoreId)
+module.exports.task = new TaskStore(taskStoreId)
 
-module.exports = CustomStore
+module.exports.store = CustomStore
 
 function TaskStore (id) {
   var store = new CustomStore(taskStoreId)
@@ -30,7 +30,6 @@ function TaskStore (id) {
   store.on('error', function (error) {
     console.error(error)
   })
-  window.store = store
 
   return getTaskApi.bind(null, state)
 }
@@ -51,9 +50,9 @@ function getTaskApi (state, type) {
           scopedStore.on('change', handleStoreChange)
 
           function handleStoreChange (eventName, changedTask, options) {
-            if (task.id !== changedTask.id) return
-
-            // if (!options || !options.remote) return
+            if (task.id !== changedTask.id) {
+              return
+            }
 
             if (eventName === 'remove') {
               emitter.emit('success', changedTask)
@@ -66,10 +65,11 @@ function getTaskApi (state, type) {
               try {
                 emitter.emit('error', changedTask.error, changedTask)
               } catch (error) {}
+
               return reject(new Error(changedTask.error))
             }
 
-            console.log('unhandled task change', task)
+            console.error('unhandled task change', task)
           }
         })
       })
