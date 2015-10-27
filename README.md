@@ -60,7 +60,7 @@ send emails from the front-end
 
 ```js
 var Hapi = require('hapi')
-var hapiAccount = require('hapi-account')
+var hapiTask = require('hapi-couchdb-task')
 
 var options = {
   backend: {
@@ -82,7 +82,7 @@ var transporter = nodemailer.createTransport({
   }
 })
 
-server.register({register: hapiAccount}, options, function (error) {
+server.register({register: hapiTask}, options, function (error) {
   var taskApi = server.plugins.task.api
   taskApi('email').on('start', handleTask)
 });
