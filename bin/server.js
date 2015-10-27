@@ -36,8 +36,8 @@ server.register({
       events: { error: '*', log: '*', request: '*', response: '*', wreck: '*' }
     }]
   }
-}, function (err) {
-  if (err) {
+}, function (error) {
+  if (error) {
     console.error(err)
   }
 })
