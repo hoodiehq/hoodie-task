@@ -69,7 +69,7 @@ var options = {
     database: 'tasks',
     auth: {
       username: 'admin',
-      password: 'sercret'
+      password: 'secret'
     }
   }
 })
