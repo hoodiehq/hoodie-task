@@ -7,7 +7,7 @@ var PouchDB = require('pouchdb')
 
 var spawnPouchdbServer = require('spawn-pouchdb-server')
 
-var serverTaskPlugin = require('hoodie-server-task')
+var serverTaskPlugin = require('@hoodie/task-server')
 var clientRoutes = require('./lib/routes/client')
 
 function hapiCouchDbStore (server, options, next) {

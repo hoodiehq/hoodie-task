@@ -1,6 +1,6 @@
 /* global location */
 
-var TaskQueue = require('hoodie-client-task')
+var TaskQueue = require('@hoodie/task-client')
 var humbleLocalStorage = require('humble-localstorage')
 var randomString = require('random-string')
 
@@ -10,8 +10,8 @@ if (!userId) {
   humbleLocalStorage.setItem('_userId', userId)
 }
 
-global.store = new TaskQueue(userId, {
-  remote: location.origin + '/api'
+global.task = new TaskQueue(userId, {
+  remote: location.origin + '/api/queue'
 })
 
 module.exports = TaskQueue
