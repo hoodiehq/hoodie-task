@@ -11,7 +11,7 @@ if (!userId) {
 }
 
 global.task = new TaskQueue(userId, {
-  remote: location.origin + '/api/queue'
+  remote: location.origin + '/api/queue/' + userId
 })
 
 module.exports = TaskQueue
