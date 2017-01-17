@@ -1,150 +1,47 @@
-# hoodie-standalone-task
+# hoodie-task
 
-> CouchDB-based REST & front-end API for asynchronous background tasks
+> Hoodie Tasks core module
 
-## Scope
+THIS IS WORK IN PROGRESS - USING HOODIE-STORE AS BASIS FOR THE ALL NEW HOODIE TASK SERVER & CLIENT MODULES.
+PLEASE NOTE: MANY HOODIE-STORE CODE/REFERENCES MAY PERSIST UNTIL FULLY ADAPTED.
 
-The goal is to create very simplistic server for static apps that can
-run background tasks that require back-end logic using a simple front-end
-API.
+`hoodie-tasks` combines [task-client](https://github.com/hoodiehq/hoodie-task-client),
+[task-server](https://github.com/hoodiehq/hoodie-task-server).
 
-## Install
+## Usage
 
-```
-npm install --save hoodie-standalone-task
-```
-
-## Client API
-
-The client API can be loaded at `/task.js`
-
-```js
-task('email').start({
-  to: 'john@example.com',
-  subject: 'Ohaj there',
-  body: 'Hey John,\n\nhow are things?\n\n– Jane'
-}).then(function (task) {
-  alert('Email "' + task.subject + '" sent')
-}).catch(function (error) {
-  alert(error)
-})
-```
-
-Full API
-
-```js
-taskApi = task(type)
-task.on(eventName, handler)
-task.one(eventName, handler)
-
-taskApi.start(attributes/*, options */)
-taskApi.abort(id/*, options */)
-taskApi.restart(id/*, options */)
-taskApi.on(eventName, handler)
-taskApi.one(eventName, handler)
-```
-
-Events, same for `task.on / one` and `taskApi.on / one`
-
-```js
-task.on('start', handleNewTask)
-task.on('abort', handleNewTaskError)
-task.on('success', handleNewTaskSuccess)
-task.on('error', handleNewTaskError)
-```
-
-## Server API
-
-Example usage with [nodemailer](https://www.npmjs.com/package/nodemailer) to
-send emails from the front-end
-
-```js
-var Hapi = require('hapi')
-var hapiTask = require('hoodie-standalone-task')
-
-var options = {
-  backend: {
-    name: 'couchdb',
-    location: 'http://localhost:5984',
-    database: 'tasks',
-    auth: {
-      username: 'admin',
-      password: 'secret'
-    }
-  }
-})
-
-var transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'mailer@example.com',
-    pass: 'secret'
-  }
-})
-
-server.register({register: hapiAccount}, options, function (error) {
-server.register({register: hapiTask}, options, function (error) {
-  var taskApi = server.plugins.task.api
-  taskApi('email').on('start', handleTask)
-});
-
-function handleTask (task) {
-  task.from = 'mailer@example.com'
-  transporter.sendMail(task, function (error, info) {
-    if (error) {
-      return taskApi.error(task, error, function (error) {
-        if (error) {
-          console.log('FATAL: could not set error on %s/%s: %s', task.type, task.id, error)
-        }
-      })
-    }
-
-    taskApi.success(task, function (error) {
-      if (error) {
-        console.log('FATAL: could not mark task %s/%s as finished', task.type, task.id)
-      }
-    })
-  })
-}
-
-server.connection({
-  port: 8000
-});
-
-server.start(function () {
-  console.log('Server running at %s', server.info.uri);
-});
-```
-
-## REST API
-
-```
-POST /api/user/<id>/_bulk_docs
-GET /api/user/<id>/_changes
-GET /task.js
-```
-
-## How it works
-
-Tasks are simple json objects with special properties. `hoodie-standalone-task` creates a `tasks`
-database where all task objects from all users are replicated to / from. Users can only
-access their own tasks (`/api/user/<id>/_changes` is a filtered changes feed by the given user id).
-
-## Local setup & tests
-
-```bash
-git clone git@github.com:hoodiehq/hoodie-standalone-task.git
-cd hoodie-standalone-task
-npm install
-npm test
-```
-
-To start the [local dev server](bin/server), run
+Start the demo server
 
 ```
 npm start
 ```
 
+If you want to use the store module as plugin of your [Hapi](http://hapijs.com/)
+server, check out [example/index.js](exmaple/index.js) to see how to register
+the [task-server](https://github.com/hoodiehq/hoodie-task-server) and how
+to bundle and server the [task-client](https://github.com/hoodiehq/hoodie-task-client)
+
+## Testing
+
+Local setup
+
+```
+git clone https://github.com/hoodiehq/hoodie-task.git
+cd hoodie-task
+npm install
+```
+
+Run end-to-end tests with selenium
+
+```
+npm test
+```
+
+## Contributing
+
+Have a look at the Hoodie project's [contribution guidelines](https://github.com/hoodiehq/hoodie/blob/master/CONTRIBUTING.md).
+If you want to hang out you can join our [Hoodie Community Chat](http://hood.ie/chat/).
+
 ## License
 
-MIT
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)

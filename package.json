@@ -1,50 +1,60 @@
 {
-  "name": "hoodie-standalone-task",
-  "description": "CouchDB-based REST & front-end API for asynchronous background tasks",
-  "main": "index.js",
-  "bin": "bin/server.js",
+  "name": "@hoodie/task",
+  "version": "0.0.0-semantically-released",
+  "description": "Hoodie Task core module",
+  "main": "server/index.js",
+  "browser": "client/index.js",
   "scripts": {
+    "pretest": "standard",
     "test": "standard",
-    "start": "bin/server.js"
+    "start": "node example/",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "postpublish": "greenkeeper-postpublish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hoodiehq/hoodie-standalone-task.git"
+    "url": "https://github.com/hoodiehq/hoodie-task.git"
   },
   "keywords": [
-    "hapi",
-    "plugin",
-    "couchdb",
-    "pouchdb",
+    "hoodie",
+    "offlinefirst",
     "task",
-    "hoodie"
+    "sync",
+    "data"
   ],
-  "author": "Gregor Martynus <gregor@martynus.net>",
-  "license": "MIT",
+  "author": "The Hoodie Community and other contributors | http://hood.ie/",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
-    "url": "https://github.com/hoodiehq/hoodie-standalone-task/issues"
+    "url": "https://github.com/hoodiehq/hoodie-task/issues"
   },
-  "homepage": "https://github.com/hoodiehq/hoodie-standalone-task#readme",
-  "devDependencies": {
-    "semantic-release": "^6.0.3",
-    "standard": "^5.2.2"
-  },
+  "homepage": "https://github.com/hoodiehq/hoodie-task#readme",
   "dependencies": {
-    "boom": "^2.8.0",
-    "browserify": "^11.0.1",
-    "good": "^6.3.0",
-    "good-console": "^5.0.3",
-    "h2o2": "^4.0.1",
-    "hapi": "^9.3.1",
-    "hapi-cors-headers": "^1.0.0",
-    "@hoodie/task-client": "^1.0.0",
-    "@hoodie/task-server": "^1.0.0",
+    "@hoodie/task-client": "https://github.com/hoodiehq/hoodie-task-client.git",
+    "@hoodie/task-server": "https://github.com/hoodiehq/hoodie-task-server.git"
+  },
+  "devDependencies": {
+    "@gr2m/frontend-test-setup": "^1.2.1",
+    "browserify": "^13.0.0",
+    "chai": "^3.5.0",
+    "greenkeeper-postpublish": "^1.0.0",
+    "hapi": "^15.0.1",
     "humble-localstorage": "^1.4.2",
-    "inert": "^3.0.1",
-    "joi": "^6.6.1",
-    "pouchdb": "^5.0.0",
+    "inert": "^4.0.0",
+    "memdown": "^1.1.2",
+    "mocha": "^3.0.0",
+    "pouchdb": "^6.0.4",
     "random-string": "^0.1.2",
-    "request": "^2.61.0",
-    "spawn-pouchdb-server": "^3.1.0"
+    "semantic-release": "^6.2.1",
+    "standard": "^8.0.0"
+  },
+  "frontend-test-setup": {
+    "server": {
+      "cmd": "npm start",
+      "host": "127.0.0.1",
+      "port": 4663
+    }
   }
 }
