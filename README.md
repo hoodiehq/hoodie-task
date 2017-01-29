@@ -1,4 +1,4 @@
-# hoodie-standalone-task
+# hoodie-task
 
 > CouchDB-based REST & front-end API for asynchronous background tasks
 
@@ -11,7 +11,7 @@ API.
 ## Install
 
 ```
-npm install --save hoodie-standalone-task
+npm install --save hoodie-task
 ```
 
 ## Client API
@@ -60,7 +60,7 @@ send emails from the front-end
 
 ```js
 var Hapi = require('hapi')
-var hapiTask = require('hoodie-standalone-task')
+var hapiTask = require('hoodie-task')
 
 var options = {
   backend: {
@@ -126,15 +126,15 @@ GET /task.js
 
 ## How it works
 
-Tasks are simple json objects with special properties. `hoodie-standalone-task` creates a `tasks`
+Tasks are simple json objects with special properties. `hoodie-task` creates a `tasks`
 database where all task objects from all users are replicated to / from. Users can only
 access their own tasks (`/api/user/<id>/_changes` is a filtered changes feed by the given user id).
 
 ## Local setup & tests
 
 ```bash
-git clone git@github.com:hoodiehq/hoodie-standalone-task.git
-cd hoodie-standalone-task
+git clone git@github.com:hoodiehq/hoodie-task.git
+cd hoodie-task
 npm install
 npm test
 ```
