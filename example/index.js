@@ -1,10 +1,14 @@
 var Hapi = require('hapi')
-var PouchDB = require('pouchdb')
 var memdown = require('memdown')
 var inert = require('inert')
 var path = require('path')
 var EventEmitter = require('events').EventEmitter
-var hapiStore = require('../server')
+var hapiTask = require('../server')
+
+var PouchDB = require('pouchdb-core')
+  .plugin(require('pouchdb-mapreduce'))
+  .plugin(require('pouchdb-replication'))
+  .plugin(require('pouchdb-adapter-memory'))
 
 var browserify = require('browserify')([], {
   standalone: 'hoodie'
@@ -45,7 +49,7 @@ server.register(inert, function (err) {
 })
 
 server.register({
-  register: hapiStore,
+  register: hapiTask,
   options: {
     PouchDB: PouchDB.defaults({
       db: memdown

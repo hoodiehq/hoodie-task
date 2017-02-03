@@ -9,7 +9,7 @@ if (!userId) {
 }
 
 var hoodie = {
-  task: Task(userId, {remoteBaseUrl: '/hoodie/task/api'})
+  task: Task(userId, {remoteBaseUrl: window.location.origin + '/hoodie/task/api'})
 }
 
 module.exports = hoodie

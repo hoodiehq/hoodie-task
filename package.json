@@ -33,10 +33,13 @@
   "homepage": "https://github.com/hoodiehq/hoodie-task#readme",
   "dependencies": {
     "@hoodie/task-client": "https://github.com/hoodiehq/hoodie-task-client.git",
-    "@hoodie/task-server": "https://github.com/hoodiehq/hoodie-task-server.git"
+    "@hoodie/task-server": "https://github.com/hoodiehq/hoodie-task-server.git",
+    "pouchdb-adapter-memory": "^6.1.1",
+    "pouchdb-core": "^6.1.1",
+    "pouchdb-mapreduce": "^6.1.1",
+    "pouchdb-replication": "^6.1.1"
   },
   "devDependencies": {
-    "@gr2m/frontend-test-setup": "^1.2.1",
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
     "greenkeeper-postpublish": "^1.0.0",
@@ -45,16 +48,8 @@
     "inert": "^4.0.0",
     "memdown": "^1.1.2",
     "mocha": "^3.0.0",
-    "pouchdb": "^6.0.4",
     "random-string": "^0.1.2",
     "semantic-release": "^6.2.1",
     "standard": "^8.0.0"
-  },
-  "frontend-test-setup": {
-    "server": {
-      "cmd": "npm start",
-      "host": "127.0.0.1",
-      "port": 4663
-    }
   }
 }
