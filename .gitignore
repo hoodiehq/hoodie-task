@@ -1,2 +1,9 @@
 node_modules
+.DS_Store
+npm-debug.log
+dist
+public/client.js
+log
+log.txt
+config.json
 .db
