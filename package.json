@@ -8,8 +8,7 @@
     "pretest": "standard",
     "test": "standard",
     "start": "node example/",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "postpublish": "greenkeeper-postpublish"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -42,7 +41,6 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
-    "greenkeeper-postpublish": "^1.0.0",
     "hapi": "^15.0.1",
     "humble-localstorage": "^1.4.2",
     "inert": "^4.0.0",
